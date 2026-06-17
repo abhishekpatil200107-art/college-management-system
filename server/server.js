@@ -5,6 +5,8 @@ require("dotenv").config();
 
 const admissionRoutes = require("./routes/admissionRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const facultyRoutes = require("./routes/facultyRoutes");
 
 const app = express();
 
@@ -13,6 +15,9 @@ app.use(express.json());
 
 app.use("/api/admissions", admissionRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/faculty", facultyRoutes);
+
 
 mongoose
   .connect(process.env.MONGO_URL)
