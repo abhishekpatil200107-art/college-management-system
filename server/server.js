@@ -7,6 +7,7 @@ const admissionRoutes = require("./routes/admissionRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
+const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/api/admissions", admissionRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/faculty", facultyRoutes);
+app.use("/api/students", studentRoutes);
 
 
 mongoose
