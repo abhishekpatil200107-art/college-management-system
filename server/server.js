@@ -8,6 +8,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
 const studentRoutes = require("./routes/studentRoutes");
+const announcementRoutes = require("./routes/announcementRoutes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api/announcements", announcementRoutes);
 
 
 mongoose

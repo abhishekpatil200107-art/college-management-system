@@ -8,6 +8,7 @@ import Faculty from "./pages/Faculty";
 import StudentRegister from "./pages/StudentRegister";
 import StudentLogin from "./pages/StudentLogin";
 import StudentDashboard from "./pages/StudentDashboard";
+import Announcements from "./pages/Announcements";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/student-register" element={<StudentRegister />} />
       <Route path="/student-login" element={<StudentLogin />} />
       <Route path="/student-Dashboard" element={<StudentDashboard />} />
+      <Route path="/announcements-admin" element={<Announcements />} />
 
     </Routes>
   );
