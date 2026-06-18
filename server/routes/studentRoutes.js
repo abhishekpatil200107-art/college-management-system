@@ -72,4 +72,20 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const student = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json(student);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error updating profile",
+    });
+  }
+});
+
 module.exports = router;
