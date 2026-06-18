@@ -25,9 +25,9 @@ export default function StudentDashboard() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const [faculty, setFaculty] = useState<Faculty[]>([]);
-  const student = JSON.parse(
-    localStorage.getItem("student") || "{}"
-  );
+  const student = JSON.parse(localStorage.getItem("student") || "{}");
+  const [editMode, setEditMode] = useState(false);
+  const [profile, setProfile] = useState(student);
 
   useEffect(() => {
     const token = localStorage.getItem("studentToken");
@@ -45,6 +45,33 @@ export default function StudentDashboard() {
       .then((data) => setFaculty(data));
   }, [navigate]);
 
+
+  const updateProfile = async () => {
+    const response = await fetch(
+      `http://localhost:5000/api/students/${student.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      }
+    );
+
+    const updatedStudent = await response.json();
+
+    localStorage.setItem(
+      "student",
+      JSON.stringify(updatedStudent)
+    );
+
+    setProfile(updatedStudent);
+
+    alert("Profile Updated");
+    setEditMode(false);
+
+    window.location.reload();
+  };
   return (
 
     <section className="section">
@@ -55,6 +82,47 @@ export default function StudentDashboard() {
       <p>Email: {student.email}</p>
       <p>Phone: {student.phone}</p>
       <p>Course: {student.course}</p>
+
+      <button onClick={() => setEditMode(true)}>
+        Edit Profile
+      </button>
+
+      {editMode && (
+        <div>
+          <input
+            value={profile.name}
+            onChange={(e) =>
+              setProfile({ ...profile, name: e.target.value })
+            }
+          />
+
+          <input
+            value={profile.phone}
+            onChange={(e) =>
+              setProfile({ ...profile, phone: e.target.value })
+            }
+          />
+
+          <input
+            value={profile.course}
+            onChange={(e) =>
+              setProfile({ ...profile, course: e.target.value })
+            }
+          />
+
+          <button onClick={updateProfile}>
+            Save
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setEditMode(false)}>
+            Cancel
+          </button>
+        </div>
+      )}
+
+
 
       <button
         onClick={() => {
